@@ -6,7 +6,10 @@ jobs:
 
     deployment:
         name: "to the moon 🚀"
-        runs-on: ubuntu-latest
+        strategy:
+          matrix:
+            os: [ubuntu-22.04, ubuntu-20.04]
+        runs-on: ${{ matrix.os }}
         steps:
           - name: Checkout
             uses: actions/checkout@v3
@@ -23,5 +26,5 @@ jobs:
           - name: Upload artifact
             uses: actions/upload-artifact@v3
             with:
-              name: decK
+              name: decK-${{ matrix.os }}
               path: deck
