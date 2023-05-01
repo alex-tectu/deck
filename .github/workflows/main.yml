@@ -1,0 +1,27 @@
+name: build new decK
+on:
+  workflow_dispatch:
+
+jobs:
+
+    deployment:
+        name: "to the moon 🚀"
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v3
+
+          - name: Install go
+            uses: actions/setup-go@v3
+            with:
+              go-version: 1.18
+
+          - name: Go build
+            run: |
+              CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o deck
+          
+          - name: Upload artifact
+            uses: actions/upload-artifact@v3
+            with:
+              name: decK
+              path: deck
